@@ -19,7 +19,7 @@ SkillSwap is a web-based platform designed to solve the problem of expensive edu
 * **Architecture:** RESTful API
 
 ## 🎥 Project Demo
-[PASTE YOUR YOUTUBE VIDEO LINK HERE]
+(https://youtu.be/imp-YS-BSao)
 
 ## 💻 How to Run Locally
 1.  Clone the repository.
