@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exchange - SkillSwap</title>
+  <link rel="stylesheet" href="style.css"> </head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">SS</div>
+        <span class="logo-text">SkillSwap</span>
+      </a>
+      <button class="menu-toggle"><span></span><span></span><span></span></button>
+      <div class="header-nav">
+        <ul class="nav-links">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="exchange.html" class="active">Exchange</a></li>
+          <li><a href="transactions.html">Transactions</a></li>
+        </ul>
+        <div class="user-menu">
+          <div class="user-avatar" id="userAvatar">U</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper"> <aside class="contacts-sidebar">
+      <div class="sidebar-header">Recent Chats</div>
+      <div class="contacts-list">
+        <div class="contact-item active">
+          <div class="contact-avatar" style="background: #10b981;">SJ</div>
+          <div>
+            <div style="font-weight:600">group chat</div>
+            <div style="font-size:0.8rem; color:#64748b">Online</div>
+          </div>
+        </div>
+        </div>
+    </aside>
+
+    <section class="chat-window"> <div class="chat-header">
+        <div class="header-avatar">SJ</div>
+        <div>
+          <h3 style="font-size:1.1rem; margin:0;">group chat</h3>
+          <div class="status-badge"><span class="status-dot"></span> Online</div>
+        </div>
+      </div>
+
+      <div class="messages-area" id="messagesContainer">
+        </div>
+
+      <div class="input-area">
+        <textarea 
+          class="msg-input" 
+          id="messageInput" 
+          placeholder="Type your message..." 
+          rows="1"></textarea>
+        <button class="send-btn" id="sendBtn">Send</button>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+    
+    // Load User Avatar
+    const userRaw = localStorage.getItem('skillswap_user');
+    if (userRaw) {
+        const user = JSON.parse(userRaw);
+        document.getElementById('userAvatar').textContent = user.avatar;
+    }
+  </script>
+
+  <script src="js/exchange.js"></script>
+</body>
+</html>

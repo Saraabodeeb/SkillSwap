@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - SkillSwap</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">SS</div>
+        <span class="logo-text">SkillSwap</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+
+      <div class="header-nav">
+        <ul class="nav-links">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="profile.html" class="active">Profile</a></li>
+          <li><a href="exchange.html">Exchange</a></li>
+          <li><a href="transactions.html">Transactions</a></li>
+        </ul>
+
+        <div class="user-menu">
+          <div class="user-avatar" id="userAvatar" title="User Profile">U</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="profile-header">
+      <div class="profile-avatar-large" id="profileAvatarLarge">U</div>
+      <div class="profile-info">
+        <h1 class="profile-name" id="profileName">User Name</h1>
+        <p style="color: var(--gray);">Member since Dec 2025</p>
+        
+        <div class="profile-stats">
+          <div class="stat-item">
+            <div class="stat-value" id="statSkillCoins">0</div>
+            <div class="stat-label">SkillCoins</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="statSwaps">0</div>
+            <div class="stat-label">Total Swaps</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="statRating">5.0</div>
+            <div class="stat-label">Rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+      <span>✓</span><span>Profile saved successfully!</span>
+    </div>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-icon">🎯</span> Skills You Offer</h2>
+      </div>
+      <div class="add-skill-form">
+        <input type="text" id="offerInput" class="skill-input" placeholder="e.g., Web Development, Design..." maxlength="50">
+        <button class="btn-add" id="addOfferBtn">+ Add Skill</button>
+      </div>
+      <div class="skills-container" id="offeredSkills">
+        </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title"><span class="section-icon">📚</span> Skills You Want</h2>
+      </div>
+      <div class="add-skill-form">
+        <input type="text" id="wantInput" class="skill-input" placeholder="e.g., Spanish, Cooking..." maxlength="50">
+        <button class="btn-add" id="addWantBtn">+ Add Skill</button>
+      </div>
+      <div class="skills-container" id="wantedSkills">
+        </div>
+    </section>
+
+    <div class="save-section">
+      <button class="btn-save" id="saveBtn">Save Changes</button>
+    </div>
+  </main>
+  <script src="js/profile.js"></script>
+</body>
+</html>

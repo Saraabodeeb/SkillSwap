@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - SkillSwap</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #8b5cf6;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --white: #ffffff;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--white);
+      padding: 2rem 0;
+      box-shadow: 0 2px 10px var(--shadow);
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-title {
+      font-size: 2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .admin-icon {
+      font-size: 2.5rem;
+    }
+
+    .admin-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 20px;
+    }
+
+    /* Stats Section */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--white);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px var(--shadow);
+    }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .stat-label {
+      color: var(--gray);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .stat-icon.purple {
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--primary);
+    }
+
+    .stat-icon.green {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+    }
+
+    .stat-icon.orange {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--warning);
+    }
+
+    .stat-icon.red {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--error);
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    /* Control Panel */
+    .control-panel {
+      background: var(--white);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .panel-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.875rem 1.75rem;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--white);
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--light);
+      color: var(--dark);
+      border: 2px solid #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--white);
+      border-color: transparent;
+    }
+
+    /* Users Table */
+    .table-container {
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px var(--shadow);
+      overflow: hidden;
+    }
+
+    .table-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .table-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .search-box {
+      padding: 0.75rem 1rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      min-width: 250px;
+      transition: all 0.3s;
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    .users-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .users-table thead {
+      background: var(--light);
+    }
+
+    .users-table th {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      font-weight: 700;
+      color: var(--dark);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .users-table td {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--light);
+    }
+
+    .users-table tbody tr {
+      transition: background 0.2s;
+    }
+
+    .users-table tbody tr:hover {
+      background: var(--light);
+    }
+
+    /* User Info */
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .user-details {
+      flex: 1;
+    }
+
+    .user-name {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .user-email {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    /* Skills Tags */
+    .skills-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .skill-tag {
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--primary);
+    }
+
+    .skill-tag.limited {
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--primary);
+    }
+
+    .more-skills {
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: var(--light);
+      color: var(--gray);
+    }
+
+    /* Balance */
+    .balance {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Status Badge */
+    .status-badge {
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .status-badge.active {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+    }
+
+    .status-badge.inactive {
+      background: rgba(239, 68, 68, 0.1);
+      color: var(--error);
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-action {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+    }
+
+    .btn-view {
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--primary);
+    }
+
+    .btn-view:hover {
+      background: rgba(99, 102, 241, 0.2);
+    }
+
+    .btn-edit {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--warning);
+    }
+
+    .btn-edit:hover {
+      background: rgba(245, 158, 11, 0.2);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--gray);
+    }
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    /* Section Toggle */
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .admin-title {
+        font-size: 1.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+
+      .users-table th,
+      .users-table td {
+        padding: 1rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .btn-action {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .users-table {
+        font-size: 0.9rem;
+      }
+
+      .user-info {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .stat-value {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="admin-title">
+        <span class="admin-icon">⚙️</span>
+        <div>
+          <div>Admin Panel</div>
+          <div style="font-size: 1rem; font-weight: 400; opacity: 0.9;">SkillSwap Management</div>
+        </div>
+      </div>
+      <div class="admin-badge">Administrator</div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-label">Total Users</span>
+          <div class="stat-icon purple">👥</div>
+        </div>
+        <div class="stat-value" id="totalUsers">0</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-label">Active Exchanges</span>
+          <div class="stat-icon green">🔄</div>
+        </div>
+        <div class="stat-value" id="activeExchanges">0</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-label">Total SkillCoins</span>
+          <div class="stat-icon orange">🪙</div>
+        </div>
+        <div class="stat-value" id="totalCoins">0</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-label">Completed Swaps</span>
+          <div class="stat-icon red">✅</div>
+        </div>
+        <div class="stat-value" id="completedSwaps">0</div>
+      </div>
+    </div>
+
+    <!-- Control Panel -->
+    <div class="control-panel">
+      <h2 class="panel-title">Admin Controls</h2>
+      <div class="button-group">
+        <button class="btn btn-primary active" id="viewUsersBtn" onclick="showSection('users')">
+          <span>👥</span>
+          <span>View Users</span>
+        </button>
+        <button class="btn btn-secondary" id="monitorExchangesBtn" onclick="showSection('exchanges')">
+          <span>🔄</span>
+          <span>Monitor Exchanges</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Users Section -->
+    <div class="section active" id="usersSection">
+      <div class="table-container">
+        <div class="table-header">
+          <h3 class="table-title">User Management</h3>
+          <input 
+            type="text" 
+            class="search-box" 
+            id="searchUsers" 
+            placeholder="Search users by name or email..."
+          >
+        </div>
+
+        <div class="table-wrapper">
+          <table class="users-table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Skills Offered</th>
+                <th>SkillCoins</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody">
+              <!-- Users will be loaded here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exchanges Section -->
+    <div class="section" id="exchangesSection">
+      <div class="table-container">
+        <div class="table-header">
+          <h3 class="table-title">Active Exchanges</h3>
+          <input 
+            type="text" 
+            class="search-box" 
+            id="searchExchanges" 
+            placeholder="Search exchanges..."
+          >
+        </div>
+
+        <div class="table-wrapper">
+          <table class="users-table">
+            <thead>
+              <tr>
+                <th>Participants</th>
+                <th>Skills Exchanged</th>
+                <th>Status</th>
+                <th>Date Started</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="exchangesTableBody">
+              <!-- Exchanges will be loaded here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Sample user data
+    const usersData = [
+      {
+        id: 1,
+        name: 'John Doe',
+        email: 'john.doe@email.com',
+        avatar: 'JD',
+        skills: ['JavaScript', 'React', 'Node.js', 'HTML/CSS'],
+        skillCoins: 150,
+        status: 'active'
+      },
+      {
+        id: 2,
+        name: 'Sarah Johnson',
+        email: 'sarah.j@email.com',
+        avatar: 'SJ',
+        skills: ['Web Design', 'UI/UX', 'Figma'],
+        skillCoins: 200,
+        status: 'active'
+      },
+      {
+        id: 3,
+        name: 'Mike Chen',
+        email: 'mike.chen@email.com',
+        avatar: 'MC',
+        skills: ['Photography', 'Video Editing', 'Adobe Suite'],
+        skillCoins: 175,
+        status: 'active'
+      },
+      {
+        id: 4,
+        name: 'Emily Davis',
+        email: 'emily.d@email.com',
+        avatar: 'ED',
+        skills: ['Spanish', 'French', 'Translation'],
+        skillCoins: 120,
+        status: 'active'
+      },
+      {
+        id: 5,
+        name: 'Alex Rodriguez',
+        email: 'alex.r@email.com',
+        avatar: 'AR',
+        skills: ['Yoga', 'Meditation', 'Fitness'],
+        skillCoins: 95,
+        status: 'inactive'
+      },
+      {
+        id: 6,
+        name: 'Lisa Anderson',
+        email: 'lisa.a@email.com',
+        avatar: 'LA',
+        skills: ['Gardening', 'Plant Care'],
+        skillCoins: 80,
+        status: 'active'
+      }
+    ];
+
+    // Sample exchanges data
+    const exchangesData = [
+      {
+        id: 1,
+        user1: 'John Doe',
+        user2: 'Sarah Johnson',
+        skill1: 'JavaScript',
+        skill2: 'Web Design',
+        status: 'in-progress',
+        date: 'Nov 25, 2025'
+      },
+      {
+        id: 2,
+        user1: 'Mike Chen',
+        user2: 'Emily Davis',
+        skill1: 'Photography',
+        skill2: 'Spanish',
+        status: 'in-progress',
+        date: 'Nov 24, 2025'
+      },
+      {
+        id: 3,
+        user1: 'Lisa Anderson',
+        user2: 'Alex Rodriguez',
+        skill1: 'Gardening',
+        skill2: 'Yoga',
+        status: 'pending',
+        date: 'Nov 23, 2025'
+      }
+    ];
+
+    // Initialize
+    function init() {
+      calculateStats();
+      renderUsers();
+      renderExchanges();
+
+      // Search functionality
+      document.getElementById('searchUsers').addEventListener('input', (e) => {
+        renderUsers(e.target.value);
+      });
+
+      document.getElementById('searchExchanges').addEventListener('input', (e) => {
+        renderExchanges(e.target.value);
+      });
+    }
+
+    // Calculate statistics
+    function calculateStats() {
+      document.getElementById('totalUsers').textContent = usersData.length;
+      document.getElementById('activeExchanges').textContent = exchangesData.filter(e => e.status === 'in-progress').length;
+      document.getElementById('totalCoins').textContent = usersData.reduce((sum, u) => sum + u.skillCoins, 0);
+      document.getElementById('completedSwaps').textContent = 47; // Mock value
+    }
+
+    // Render users table
+    function renderUsers(searchTerm = '') {
+      const filtered = usersData.filter(user => 
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      const tbody = document.getElementById('usersTableBody');
+      
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5">
+              <div class="empty-state">
+                <div class="empty-icon">🔍</div>
+                <h3>No users found</h3>
+                <p>Try adjusting your search</p>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(user => `
+        <tr>
+          <td>
+            <div class="user-info">
+              <div class="user-avatar">${user.avatar}</div>
+              <div class="user-details">
+                <div class="user-name">${user.name}</div>
+                <div class="user-email">${user.email}</div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="skills-tags">
+              ${user.skills.slice(0, 2).map(skill => `
+                <span class="skill-tag">${skill}</span>
+              `).join('')}
+              ${user.skills.length > 2 ? `<span class="more-skills">+${user.skills.length - 2} more</span>` : ''}
+            </div>
+          </td>
+          <td>
+            <div class="balance">
+              <span>🪙</span>
+              <span>${user.skillCoins}</span>
+            </div>
+          </td>
+          <td>
+            <span class="status-badge ${user.status}">${user.status === 'active' ? 'Active' : 'Inactive'}</span>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <button class="btn-action btn-view" onclick="viewUser(${user.id})">View</button>
+              <button class="btn-action btn-edit" onclick="editUser(${user.id})">Edit</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Render exchanges table
+    function renderExchanges(searchTerm = '') {
+      const filtered = exchangesData.filter(exchange => 
+        exchange.user1.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        exchange.user2.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        exchange.skill1.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        exchange.skill2.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      const tbody = document.getElementById('exchangesTableBody');
+      
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5">
+              <div class="empty-state">
+                <div class="empty-icon">🔍</div>
+                <h3>No exchanges found</h3>
+                <p>Try adjusting your search</p>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(exchange => `
+        <tr>
+          <td>
+            <div style="font-weight: 600;">${exchange.user1} ↔️ ${exchange.user2}</div>
+          </td>
+          <td>
+            <div class="skills-tags">
+              <span class="skill-tag">${exchange.skill1}</span>
+              <span style="color: var(--gray);">for</span>
+              <span class="skill-tag">${exchange.skill2}</span>
+            </div>
+          </td>
+          <td>
+            <span class="status-badge ${exchange.status === 'in-progress' ? 'active' : 'inactive'}">
+              ${exchange.status === 'in-progress' ? 'In Progress' : 'Pending'}
+            </span>
+          </td>
+          <td>${exchange.date}</td>
+          <td>
+            <div class="action-buttons">
+              <button class="btn-action btn-view" onclick="viewExchange(${exchange.id})">Details</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Show section
+    function showSection(section) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      
+      // Remove active class from all buttons
+      document.querySelectorAll('.button-group .btn').forEach(b => {
+        b.classList.remove('btn-primary', 'active');
+        b.classList.add('btn-secondary');
+      });
+
+      // Show selected section and activate button
+      if (section === 'users') {
+        document.getElementById('usersSection').classList.add('active');
+        const btn = document.getElementById('viewUsersBtn');
+        btn.classList.add('btn-primary', 'active');
+        btn.classList.remove('btn-secondary');
+      } else if (section === 'exchanges') {
+        document.getElementById('exchangesSection').classList.add('active');
+        const btn = document.getElementById('monitorExchangesBtn');
+        btn.classList.add('btn-primary', 'active');
+        btn.classList.remove('btn-secondary');
+      }
+    }
+
+    // Action handlers (mock functions)
+    function viewUser(id) {
+      const user = usersData.find(u => u.id === id);
+      alert(`Viewing user: ${user.name}\n\nEmail: ${user.email}\nSkills: ${user.skills.join(', ')}\nBalance: ${user.skillCoins} SkillCoins`);
+    }
+
+    function editUser(id) {
+      const user = usersData.find(u => u.id === id);
+      alert(`Edit user: ${user.name}\n\n(In a real app, this would open an edit form)`);
+    }
+
+    function viewExchange(id) {
+      const exchange = exchangesData.find(e => e.id === id);
+      alert(`Exchange Details:\n\n${exchange.user1} (${exchange.skill1})\n↔️\n${exchange.user2} (${exchange.skill2})\n\nStatus: ${exchange.status}\nDate: ${exchange.date}`);
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - SkillSwap</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">SS</div>
+        <span class="logo-text">SkillSwap</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="header-nav">
+        <ul class="nav-links">
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="exchange.html">Exchange</a></li>
+          <li><a href="transactions.html">Transactions</a></li>
+        </ul>
+
+        <div class="user-menu">
+          <div class="user-avatar" id="userAvatar">U</div>
+          <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="welcome-section">
+      <div class="welcome-text">
+        <h1>Welcome back, <span id="userName">User</span>!</h1>
+        <p>Ready to exchange some skills today?</p>
+      </div>
+      <div class="skillcoins-card">
+        <div class="skillcoins-label">Your SkillCoins Balance</div>
+        <div class="skillcoins-amount"><span class="coin-icon">🪙</span> <span id="skillCoinsBalance">0</span></div>
+      </div>
+    </section>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-header"><span class="stat-label">Active Exchanges</span><div class="stat-icon purple">🔄</div></div>
+        <div class="stat-value" id="activeExchanges">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header"><span class="stat-label">Completed Swaps</span><div class="stat-icon green">✅</div></div>
+        <div class="stat-value" id="completedSwaps">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header"><span class="stat-label">Skills Offered</span><div class="stat-icon orange">🎯</div></div>
+        <div class="stat-value" id="totalEarnings">0</div>
+      </div>
+    </div>
+
+    <section>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h2 class="section-title">Suggested Matches</h2>
+        <button id="refreshMatches" class="logout-btn">↻ Refresh Matches</button>
+      </div>
+
+      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <input type="text" id="matchSearch" placeholder="Search by name or skill..." style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; flex: 1;">
+        <select id="matchFilter" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px;">
+          <option value="all">All Matches</option>
+          <option value="high">High Match (>90%)</option>
+          <option value="medium">Medium Match (80-90%)</option>
+          <option value="low">Low Match (<80%)</option>
+        </select>
+      </div>
+      
+      <div id="matchesGrid" class="matches-grid">
+        <div style="text-align: center; grid-column: 1/-1; padding: 2rem;">Loading matches...</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+
+</body>
+</html>

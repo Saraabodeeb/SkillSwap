@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transactions - SkillSwap</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">SS</div>
+        <span class="logo-text">SkillSwap</span>
+      </a>
+      <button class="menu-toggle"><span></span><span></span><span></span></button>
+      <div class="header-nav">
+        <ul class="nav-links">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="exchange.html">Exchange</a></li>
+          <li><a href="transactions.html" class="active">Transactions</a></li>
+        </ul>
+        <div class="user-menu">
+          <div class="user-avatar" id="userAvatar">U</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">Transaction History</h1>
+      <p class="page-subtitle">Track your SkillCoins earnings and spending</p>
+    </div>
+
+    <div class="balance-card">
+      <div class="balance-label">Current Balance</div>
+      <div class="balance-amount">
+        <span>🪙</span>
+        <span id="currentBalance">0</span>
+        <span style="font-size: 1.5rem; font-weight: 400;">SkillCoins</span>
+      </div>
+    </div>
+
+    <div class="summary-stats">
+      <div class="stat-card">
+        <div class="stat-label">Total Earned</div>
+        <div class="stat-value green" id="totalEarned">+0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Spent</div>
+        <div class="stat-value red" id="totalSpent">-0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Transactions</div>
+        <div class="stat-value blue" id="totalTransactions">0</div>
+      </div>
+    </div>
+
+    <div class="transactions-container">
+      <div style="overflow-x: auto;">
+        <table class="transactions-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Description</th>
+              <th>SkillCoins</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="transactionsBody">
+            </tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">📊</div>
+        <h3>No transactions found</h3>
+      </div>
+    </div>
+  </main>
+  <script src="js/transactions.js"></script>
+</body>
+</html>
