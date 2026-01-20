@@ -55,18 +55,44 @@ The system uses a normalized relational database to ensure data integrity.
 
 ---
 
+
+```markdown
 ## 💻 How to Run Locally
 
 1. **Clone the repository**
    ```bash
    git clone [https://github.com/Saraabodeeb/SkillSwap.git](https://github.com/Saraabodeeb/SkillSwap.git)
    cd SkillSwap
+
+```
+
 2. **Install Dependencies**
-   npm install
+```bash
+npm install
+
+```
+
+
 3. **Database Setup**
-   Create a MySQL database named skillswap_db.
-   Import the schema.sql file located in the /database folder.
-   Configure your database credentials in db.js or .env file.
+* Create a MySQL database named `skillswap_db`.
+* Import the `schema.sql` file located in the `/database` folder.
+* Configure your database credentials in `db.js` or `.env` file.
+
+
 4. **Start the Server**
-   node server.js
-5. **Access the App** Open http://localhost:3000 in your browser.
+```bash
+node server.js
+
+```
+
+
+5. **Access the App**
+Open `http://localhost:3000` in your browser.
+
+---
+
+## 🤝 Future Improvements
+
+* [ ] Migrate from Polling to **Socket.io** for true real-time chat.
+* [ ] Implement **JWT** (JSON Web Tokens) for stateless authentication.
+* [ ] Add a rating system for skill exchanges.
