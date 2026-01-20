@@ -60,7 +60,7 @@ The system uses a normalized relational database to ensure data integrity.
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/YourUsername/SkillSwap.git](https://github.com/YourUsername/SkillSwap.git)
+   git clone [https://github.com/Saraabodeeb/SkillSwap.git]https://github.com/Saraabodeeb/SkillSwap.git)
    cd SkillSwap
 Install Dependencies
 
@@ -72,7 +72,7 @@ Database Setup
 Create a MySQL database named skillswap_db.
 
 Import the schema.sql file located in the /database folder.
-
+https://github.com/Saraabodeeb/SkillSwap
 Configure your database credentials in db.js or .env file.
 
 Start the Server
