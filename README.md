@@ -2,7 +2,6 @@
 
 ![NodeJS](https://img.shields.io/badge/Node.js-18.x-green) ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue) ![Express](https://img.shields.io/badge/Express.js-4.x-lightgrey) ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-> **University Project** | Web Programming (CNC111)  
 > **Developed by:** Sara Abodeeb
 
 ---
