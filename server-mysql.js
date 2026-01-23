@@ -11,18 +11,20 @@ import mysql from 'mysql2';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+dotenv.config();
 
 // Step 2: Configure the Database Connection
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '', // Use 'root' for Mac if needed
-  database: 'skillswap',
-  port: 3306
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'skillswap',
+  port: process.env.DB_PORT || 3306
 });
 
 db.connect((err) => {
@@ -31,7 +33,6 @@ db.connect((err) => {
     process.exit(1);
   }
   console.log('Connected to MySQL database.');
-
   // Step 3: Create the 'users' table if it doesn't exist
   const createTable = `CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
