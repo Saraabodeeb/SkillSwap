@@ -89,6 +89,13 @@ node server.js
 5. **Access the App**
 Open `http://localhost:3000` in your browser.
 
+
+**6. Environmental Variables:**
+"Create a .env file in the root directory based on .env.example to secure your database credentials."
+
+**Security Note:**
+"This project uses dotenv to manage configuration and ensure that sensitive information is never pushed to the repository."
+
 ---
 
 ## 🤝 Future Improvements
