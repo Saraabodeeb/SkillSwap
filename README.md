@@ -7,7 +7,7 @@
 ---
 
 ## 📖 Project Overview
-**SkillSwap** is a web-based platform designed to democratize education by solving the problem of high costs. It creates a collaborative ecosystem where university students can exchange skills (e.g., *"I teach you Python, you teach me Graphic Design"*) using a unique time-bartering currency system called **"SkillCoins."**
+**SkillSwap** is a web-based platform designed to enable skill exchange between university students using a time-based virtual currency system. It creates a collaborative ecosystem where university students can exchange skills (e.g., *"I teach you Python, you teach me Graphic Design"*) using a unique time-bartering currency system called **"SkillCoins."**
 
 ### 🎥 [Watch Project Demo](https://youtu.be/imp-YS-BSao)
 
@@ -15,8 +15,8 @@
 
 ## 🔍 Technical Highlights
 - Designed and implemented a time-based virtual currency system (SkillCoins) with transaction logging to ensure data consistency.
-- Built a RESTful backend using MVC architecture with clear separation of concerns.
 - Modeled relational data with many-to-many relationships to support users, skills, and exchanges.
+- Built a RESTful backend using MVC architecture with clear separation of concerns.
 - Focused on correctness and edge-case handling in skill exchange and balance updates.
 
 ---
