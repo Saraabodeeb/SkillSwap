@@ -13,6 +13,14 @@
 
 ---
 
+## 🔍 Technical Highlights
+- Designed and implemented a time-based virtual currency system (SkillCoins) with transaction logging to ensure data consistency.
+- Built a RESTful backend using MVC architecture with clear separation of concerns.
+- Modeled relational data with many-to-many relationships to support users, skills, and exchanges.
+- Focused on correctness and edge-case handling in skill exchange and balance updates.
+
+---
+
 ## ✨ Key Features
 ### 🔐 Security & Auth
 * **Secure Authentication:** Implemented user registration and login using **bcrypt** for password hashing and encryption.
@@ -98,8 +106,8 @@ Open `http://localhost:3000` in your browser.
 
 ---
 
-## 🤝 Future Improvements
+## 🚀 Potential Extensions
 
-* [ ] Migrate from Polling to **Socket.io** for true real-time chat.
-* [ ] Implement **JWT** (JSON Web Tokens) for stateless authentication.
-* [ ] Add a rating system for skill exchanges.
+- Replacing polling with WebSockets (Socket.io) for real-time messaging.
+- Introducing JWT-based authentication for stateless session management.
+- Adding a reputation system to evaluate skill exchanges.
