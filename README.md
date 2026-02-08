@@ -47,7 +47,12 @@
 
 ### 🗄️ Database Schema (ERD)
 The system uses a normalized relational database to ensure data integrity.
-*(Please add your ERD screenshot here, e.g., `![ERD](./screenshots/erd.png)`)*
+![Database Schema](ERD.png)
+<img width="801" height="367" alt="Screenshot 2026-02-08 at 18 23 17" src="https://github.com/user-attachments/assets/69ee27a1-552f-45ba-9011-4b0cc2e52047" />
+### System Architecture (Use Case)
+![Use Case Diagram](UseCase.png) 
+<img width="799" height="423" alt="Screenshot 2026-02-08 at 18 24 56" src="https://github.com/user-attachments/assets/112f0efe-cdb7-40bf-be87-75d2096bada7" />
+
 
 * **Users Table:** Stores credentials and SkillCoin balance.
 * **Transactions Table:** Logs every skill exchange with timestamps.
